@@ -1,0 +1,66 @@
+Print leaf nodes from preorder traversal of BST
+
+//User function Template for Java
+class Solution
+{
+    public int[] leafNodes(int arr[], int N)
+    {
+        // code here
+        ArrayList<Integer> al= new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
+       
+        for(int i =0,j=1; j<N ;i++,j++)
+        {
+             boolean flag = false;
+             
+            if(arr[i]>arr[j])
+            st.push(arr[i]);
+            
+            else
+            {
+                while(!st.isEmpty())
+                {
+                    if(arr[j] > st.peek())
+                    {
+                        st.pop();
+                        flag = true;
+                    }
+                    else break;
+                }
+            }
+            
+            if(flag)
+            {
+                al.add(arr[i]);
+            }
+        }
+        al.add(arr[N-1]);
+        
+        int ans[] = new int[al.size()];
+        for(int i =0; i<al.size(); i++)
+        {
+            ans[i] = al.get(i);
+        }
+        return ans;
+    }
+}
+
+
+
+
+
+Example 1:
+
+Input:
+N = 2
+arr = {2,1}
+Output: {1}
+Explaination: 1 is the only leaf node.
+
+Example 2:
+
+Input:
+N = 3
+Arr = {3, 2, 4}
+Output: {2, 4}
+Explaination: 2, 4 are the leaf nodes.
